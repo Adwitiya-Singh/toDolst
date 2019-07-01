@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = {git = "https://github.com/python/black.git",ref = "stable"}
+mypy = "*"
+rope = "*"
+pytest = "*"
+pytest-cov = "*"
+isort = "*"
+sphinx = "*"
+sphinx-autodoc-typehints = "*"
+sphinx-rtd-theme = "*"
+autoflake = "*"
+docformatter = "*"
+
+[packages]
+
+[requires]
+python_version = "3.7"
