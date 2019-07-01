@@ -1,0 +1,12 @@
+{
+	"id": 1,
+	"tasks": "Do Something",
+	"notes": "This should be done eventually",
+	"owner": [
+		{
+			"username": "kyleshaver",
+			"fullname": "Kyle Shaver"
+		}
+	],
+	"completed": false
+}
