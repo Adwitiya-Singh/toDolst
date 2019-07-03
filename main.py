@@ -6,13 +6,13 @@ def getval(nested_dict: dict, key: str) -> str:
     x = ""
     for val in vals:
         val.replace(" ", "")
-        if(val[0]=='{'):
+        if (val[0] == '{'):
             val = val[1:len(val) - 1]
         for k, v in nested_dict.items():
             if k == val:
                 x += v
             elif isinstance(v, dict):
-                x += getval(v, val)
+                x += " " + getval(v, val)
 
     return x
 

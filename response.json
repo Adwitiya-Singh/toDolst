@@ -1,10 +1,10 @@
 {
 	"id": 1,
-	"task": "Do Something",
-	"notes": "This should be done eventually",
+	"task": " Do Something",
+	"notes": " This should be done eventually",
 	"owner": {
-		"username": "kyleshav",
-		"fullname": "KyleShaver"
+		"username": "kyleshav ",
+		"fullname": " Kyle Shaver"
 	},
 	"completed": false,
 	"subtask_count": 0,
