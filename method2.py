@@ -21,16 +21,14 @@ def poptemp(template: dict, request_dict: dict):
 with open('sample_request.json', 'r') as myfile:
     data = myfile.read()
 
-obj = json.loads(data)
+obj: dict = json.loads(data)
 
-flat = {}
+flat: dict = {}
 flattendict(obj, flat)
 
-data = json.loads(open('sample_template.json').read())
+data: dict = json.loads(open('sample_template.json').read())
 
 poptemp(data, flat)
-
-print(data)
 
 with open('responseOther.json', 'w') as outfile:
     json.dump(data, outfile, indent='\t')
