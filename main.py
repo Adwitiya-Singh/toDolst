@@ -4,7 +4,7 @@ from database import *
 
 data = jsonread("sample_template.json", "sample_request.json")
 datatwo = jsonread("sample_template.json", "sample_request_two.json")
-deleteall()
+# deleteall()
 create_table()
 insert(data)
 insert(datatwo)
