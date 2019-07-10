@@ -1,22 +1,5 @@
-import json
 import sqlite3
-
-
-def flatten_dict(nested_dict: dict, final_dict: dict):
-        for k, v in nested_dict.items():
-            if isinstance(v, dict):
-               flatten_dict(v, final_dict)
-            else:
-                final_dict[k] = v
-
-
-def pop_temp(template: dict, request_dict: dict):
-    for k, v in template.items():
-        if isinstance(v, dict):
-            pop_temp(v, request_dict)
-        else:
-            if isinstance(v, str):
-                template[k] = v.format(**request_dict)
+from main import *
 
 
 def get_cursor(name: str = "tasks.db"):
@@ -61,7 +44,7 @@ def mark_complete(id: int):
     cursor = get_cursor()
     cursor.execute(sql_command)
 
-    
+
 def showall():
     sql_command: str = "SELECT * FROM tasks"
     cursor = get_cursor();
@@ -78,22 +61,4 @@ def showall_incomp():
     all = cursor.fetchall()
     for i in all:
         print(i)
-
-
-with open('sample_request.json', 'r') as myfile:
-    data = myfile.read()
-
-obj: dict = json.loads(data)
-
-flat: dict = {}
-flatten_dict(obj, flat)
-
-data: dict = json.loads(open('sample_template.json').read())
-
-pop_temp(data, flat)
-
-
-with open('responseOther.json', 'w') as outfile:
-    json.dump(data, outfile, indent='\t')
-
 
