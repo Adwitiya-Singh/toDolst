@@ -1,44 +1,38 @@
 import json
+from database import *
 
-
-def getval(nested_dict: dict, key: str) -> str:
-    vals = key.split()
-    x = ""
-    for val in vals:
-        val.replace(" ", "")
-        if (val[0] == '{'):
-            val = val[1:len(val) - 1]
+def flatten_dict(nested_dict: dict, final_dict: dict):
         for k, v in nested_dict.items():
-            if k == val:
-                x += v
-            elif isinstance(v, dict):
-                x += " " + getval(v, val)
-
-    return x
+            if isinstance(v, dict):
+               flatten_dict(v, final_dict)
+            else:
+                final_dict[k] = v
 
 
-def poptemp(template: dict, request_dict: dict):
+def pop_temp(template: dict, request_dict: dict):
     for k, v in template.items():
-        if hasattr(v, 'items'):
-            poptemp(v, request_dict)
+        if isinstance(v, dict):
+            pop_temp(v, request_dict)
         else:
             if isinstance(v, str):
-                template[k] = getval(request_dict, v)
+                template[k] = v.format(**request_dict)
 
 
-# read file
+
 with open('sample_request.json', 'r') as myfile:
     data = myfile.read()
 
-# parse file
-obj = json.loads(data)
+obj: dict = json.loads(data)
 
-data = json.loads(open('sample_template.json').read())
+flat: dict = {}
+flatten_dict(obj, flat)
 
-poptemp(data, obj)
+data: dict = json.loads(open('sample_template.json').read())
 
-# print(data)
+pop_temp(data, flat)
 
 
-with open('response.json', 'w') as outfile:
+with open('responseOther.json', 'w') as outfile:
     json.dump(data, outfile, indent='\t')
+
+
