@@ -1,0 +1,12 @@
+{
+	"id": 1,
+	"task": "Do Something",
+	"notes": "This should be done eventually",
+	"owner": {
+		"username": "kyleshav",
+		"fullname": "Kyle Shaver"
+	},
+	"completed": "True",
+	"subtask_count": 0,
+	"subtasks": null
+}

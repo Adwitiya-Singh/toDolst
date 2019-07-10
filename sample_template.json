@@ -6,7 +6,7 @@
         "username": "{username}",
         "fullname": "{first} {last}"
     },
-    "completed": false,
+    "completed": "{completed}",
     "subtask_count": 0,
     "subtasks": null
 }

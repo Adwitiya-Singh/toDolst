@@ -6,6 +6,6 @@
     },
     "title": "Do Something",
     "notes": "This should be done eventually",
-    "completed": false,
+    "completed": true,
     "subtasks": null
 }
