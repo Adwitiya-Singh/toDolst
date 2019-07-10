@@ -25,13 +25,13 @@ def insert(values: dict):
     cursor = connection.cursor()
     flat_values: dict = {}
     flatten_dict(values, flat_values)
-    if flat_values['completed']:
+    if flat_values['completed'] == "True":
         flat_values['completed'] = 1
     else:
         flat_values['completed'] = 0
     if flat_values['subtasks'] is None:
         flat_values['subtasks'] = 0
-    sql_command: str = """REPLACE  INTO tasks VALUES ("{id}", "{task}", "{notes}", "{username}", "{fullname}", 
+    sql_command: str = """REPLACE INTO tasks VALUES (NULL, "{task}", "{notes}", "{username}", "{fullname}", 
     "{completed}", "{subtasks}")""".format(**flat_values)
     cursor.execute(sql_command)
     connection.commit()
@@ -46,6 +46,13 @@ def delete(id: int):
     connection.commit()
     connection.close()
 
+def deleteall():
+    connection = sqlite3.connect("myDB.db")
+    cursor = connection.cursor()
+    sql_command: str = "DELETE from tasks"
+    cursor.execute(sql_command)
+    connection.commit()
+    connection.close()
 
 def mark_complete(id: int):
     connection = sqlite3.connect("myDB.db")

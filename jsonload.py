@@ -1,3 +1,5 @@
+import json
+
 def flatten_dict(nested_dict: dict, final_dict: dict):
     for k, v in nested_dict.items():
         if isinstance(v, dict):
@@ -14,3 +16,12 @@ def pop_temp(template: dict, request_dict: dict):
             if isinstance(v, str):
                 template[k] = v.format(**request_dict)
 
+def jsonread(templatename: str, requestname: str) ->  dict:
+    with open(requestname, 'r') as myfile:
+        data = myfile.read()
+    obj: dict = json.loads(data)
+    flat: dict = {}
+    flatten_dict(obj, flat)
+    data: dict = json.loads(open(templatename).read())
+    pop_temp(data, flat)
+    return data
