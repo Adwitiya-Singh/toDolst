@@ -4,7 +4,7 @@ from jsonload import *
 from functools import wraps
 
 
-def uppermethod( message: str="working"):
+def uppermethod( message: str=""):
     def _database_connector(func: Callable) -> object:
         @wraps(func)
         def connector(*args, **kwargs):
@@ -30,7 +30,7 @@ def create_table(cursor):
     cursor.execute(sql_command)
 
 
-@uppermethod()
+@uppermethod(message="insert")
 def insert(values: Dict, *, cursor):
     flat_values: dict = {}
     flatten_dict(values, flat_values)
@@ -45,7 +45,7 @@ def insert(values: Dict, *, cursor):
     cursor.execute(sql_command)
 
 
-@uppermethod(message="success")
+@uppermethod(message="delete")
 def delete(id: int,  *, cursor):
     sql_command: str = "DELETE from tasks where id='{}'".format(id)
     cursor.execute(sql_command)

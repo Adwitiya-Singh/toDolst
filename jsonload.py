@@ -1,6 +1,8 @@
 import json
+from typing import Dict
 
-def flatten_dict(nested_dict: dict, final_dict: dict):
+
+def flatten_dict(nested_dict: Dict, final_dict: Dict):
     for k, v in nested_dict.items():
         if isinstance(v, dict):
             flatten_dict(v, final_dict)
@@ -8,7 +10,7 @@ def flatten_dict(nested_dict: dict, final_dict: dict):
             final_dict[k] = v
 
 
-def pop_temp(template: dict, request_dict: dict):
+def pop_temp(template: Dict, request_dict: Dict):
     for k, v in template.items():
         if isinstance(v, dict):
             pop_temp(v, request_dict)
@@ -16,7 +18,7 @@ def pop_temp(template: dict, request_dict: dict):
             if isinstance(v, str):
                 template[k] = v.format(**request_dict)
 
-def jsonread(templatename: str, requestname: str) ->  dict:
+def jsonread(templatename: str, requestname: str) ->  Dict:
     with open(requestname, 'r') as myfile:
         data = myfile.read()
     obj: dict = json.loads(data)
