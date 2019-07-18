@@ -45,7 +45,8 @@ def insert(values: Dict):
         flat_values['completed'] = 0
     if flat_values['subtasks'] is None:
         flat_values['subtasks'] = 0
-    task = Task(id=None, task=flat_values["task"], notes=flat_values["notes"],username=flat_values["username"], fullname=flat_values["fullname"], completed=flat_values["completed"], subtasks=flat_values["subtasks"])
+    task = Task(id=None, task=flat_values["task"], notes=flat_values["notes"], username=flat_values["username"],
+                fullname=flat_values["fullname"], completed=flat_values["completed"], subtasks=flat_values["subtasks"])
     s.add(task)
     s.commit()
 
