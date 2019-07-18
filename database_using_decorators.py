@@ -1,5 +1,6 @@
 from typing import Dict, Callable
 import sqlite3
+from sqlite3 import Cursor, Connection
 from jsonload import *
 from functools import wraps
 
@@ -8,9 +9,9 @@ def uppermethod( message: str=""):
     def _database_connector(func: Callable) -> object:
         @wraps(func)
         def connector(*args, **kwargs):
-            connection = sqlite3.connect("myDB.db")
+            connection: Connection = sqlite3.connect("myDB.db")
             print(message)
-            cursor = connection.cursor()
+            cursor: Cursor = connection.cursor()
             func(*args, **kwargs, cursor=cursor)
             connection.commit()
             connection.close()
@@ -32,7 +33,7 @@ def create_table(cursor):
 
 @uppermethod(message="insert")
 def insert(values: Dict, *, cursor):
-    flat_values: dict = {}
+    flat_values: Dict = {}
     flatten_dict(values, flat_values)
     if flat_values['completed'] == "True":
         flat_values['completed'] = 1
@@ -59,7 +60,7 @@ def deleteall(*, cursor):
 
 @uppermethod()
 def mark_complete(id:int,  *, cursor):
-    sql_command = "UPDATE tasks SET completed = 1 where id='{}'".format(id)
+    sql_command: str = "UPDATE tasks SET completed = 1 where id='{}'".format(id)
     cursor.execute(sql_command)
 
 

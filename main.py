@@ -1,19 +1,48 @@
 
-from database_using_decorators import *
+from database_using_sqlalchemy import *
 from jsonload import *
+import click
 
-data = jsonread("sample_template.json", "sample_request.json")
-datatwo = jsonread("sample_template.json", "sample_request_two.json")
-#deleteall()
-create_table()
-insert(data)
-insert(datatwo)
-# showall_incomp()
-#showall()
-mark_complete(2)
-showall_incomp()
-delete(2)
-with open('generated_response.json', 'w') as outfile:
-    json.dump(data, outfile, indent='\t')
+@click.group()
+def cli():
+    """A simple todolist"""
 
 
+@cli.command()
+@click.argument("request", type=click.Path(exists=True, dir_okay=False), default="/Users/as74855/Documents/toDolst/sample_request.json")
+@click.argument("template", type=click.Path(exists=True, dir_okay=False), default="/Users/as74855/Documents/toDolst/sample_template.json")
+def insert(request: str, template: str):
+    data = jsonread(template, request)
+    # create_table()
+    insert(data)
+
+
+@cli.command()
+@click.argument("key", type=click.INT)
+def delete(key: int):
+    delete(key)
+
+
+@cli.command()
+def deleteall():
+    deleteall()
+
+
+@cli.command()
+def showall_incomplete():
+    showall_incomp()
+
+
+@cli.command()
+def showall():
+    showall()
+
+
+@cli.command()
+@click.argument("key", type=click.INT)
+def mark_complete(key: int):
+    mark_complete(key)
+
+
+if __name__ == "__main__":
+    cli()

@@ -18,6 +18,7 @@ def pop_temp(template: Dict, request_dict: Dict):
             if isinstance(v, str):
                 template[k] = v.format(**request_dict)
 
+
 def jsonread(templatename: str, requestname: str) ->  Dict:
     with open(requestname, 'r') as myfile:
         data = myfile.read()

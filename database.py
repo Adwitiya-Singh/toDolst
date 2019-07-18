@@ -51,7 +51,7 @@ def deleteall():
 
 
 def mark_complete(id: int):
-    sql_command = "UPDATE tasks SET completed = 1 where id='{}'".format(id)
+    sql_command: str = "UPDATE tasks SET completed = 1 where id='{}'".format(id)
     runsql(sql_command)
 
 
